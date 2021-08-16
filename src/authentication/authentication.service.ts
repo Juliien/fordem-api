@@ -1,40 +1,44 @@
-import {ConflictException, Injectable} from '@nestjs/common';
-import {Account, AccountDocument} from './models/account.schema';
-import {InjectModel} from '@nestjs/mongoose';
-import {Model} from 'mongoose';
-import {AccountDto} from './models/dto/account.dto';
-import {Roles} from './models/roles.emum';
-import {hash} from 'bcrypt'
+import {ConflictException, ForbiddenException, Injectable, UnauthorizedException} from '@nestjs/common';
+import {Account} from '../accounts/models/account.schema';
+import {AccountDto} from '../accounts/models/dto/account.dto';
+import {compare, hash} from 'bcrypt';
+import {AccountsService} from '../accounts/accounts.service';
+import {LoginDto} from './models/dto/login.dto';
+import {JwtService} from '@nestjs/jwt';
 
 @Injectable()
 export class AuthenticationService {
     constructor(
-        @InjectModel(Account.name) private accountModel: Model<AccountDocument>
+        private readonly accountsService: AccountsService,
+        private readonly jwtService: JwtService
     ) {}
 
-    async createAccount(registrationData: AccountDto): Promise<AccountDocument> {
-        const emailCheck = await this.accountModel.findOne({ email: registrationData.email });
+    async register(registrationData: AccountDto): Promise<Account> {
+        const emailCheck = await this.accountsService.getAccountByEmail(registrationData.email);
 
         if (emailCheck)
             throw new ConflictException(null, 'this email already exists');
 
-        const hashPassword = await hash(registrationData.password, 10);
+        registrationData.password = await hash(registrationData.password, 10);
 
-        const newAccount: AccountDocument = new this.accountModel({
-            email: registrationData.email,
-            password: hashPassword,
-            phoneNumber: registrationData.phoneNumber,
-            role: Roles.ASSOCIATION,
-            createDate: new Date()
-        });
-
-        const account = await newAccount.save();
+        const account = await this.accountsService.createAccounts(registrationData);
         account.password = undefined;
 
         return account;
     }
 
-    async getAll() {
-        return await this.accountModel.find().exec();
+    async login(login: LoginDto): Promise<any> {
+        const account = await this.accountsService.getAccountByEmail(login.email);
+
+        if (!account)
+            throw new ForbiddenException(null,'Account not found');
+
+        const isPasswordEquals = await compare(login.password, account.password);
+
+        if (!isPasswordEquals)
+            throw new UnauthorizedException(null,'Invalid credentials');
+
+        const payload = { id: account._id, role: account.role };
+        return { token: this.jwtService.sign(payload)};
     }
 }

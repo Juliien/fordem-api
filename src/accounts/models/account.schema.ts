@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Roles } from './roles.emum';
+import { Roles } from '../../authentication/models/roles.emum';
 
 export type AccountDocument = Account & Document;
 
 @Schema()
 export class Account {
     @Prop({ type: Types.ObjectId })
-    id: string
+    _id: string
 
     @Prop()
     email: string;

@@ -1,5 +1,5 @@
-import {IsDate, IsDefined, IsEmail, IsEmpty, IsNotEmpty, IsNumber, IsString, Length, MinLength} from 'class-validator';
-import {Roles} from '../roles.emum';
+import {IsDate, IsDefined, IsEmail, IsNotEmpty, IsNumber, IsString, MinLength} from 'class-validator';
+import {Roles} from '../../../authentication/models/roles.emum';
 
 
 export class AccountDto {
@@ -17,7 +17,6 @@ export class AccountDto {
     @IsNumber()
     @IsNotEmpty()
     @IsDefined()
-    @Length(10)
     phoneNumber: number;
 
     @IsNotEmpty()
@@ -28,7 +27,5 @@ export class AccountDto {
     @IsNotEmpty()
     @IsDefined()
     createDate: Date;
-
-    @IsEmpty()
     closeDate: Date;
 }

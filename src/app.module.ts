@@ -3,14 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 require('dotenv').config();
-const { MONGO_URI } = process.env;
+
 
 @Module({
   imports: [
-      MongooseModule.forRoot(MONGO_URI),
-      AuthenticationModule
+      MongooseModule.forRoot(process.env.MONGO_URI),
+      AuthenticationModule,
+      AccountsModule
   ],
   controllers: [AppController],
   providers: [AppService],
