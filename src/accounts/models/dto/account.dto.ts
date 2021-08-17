@@ -1,7 +1,6 @@
 import {IsDate, IsDefined, IsEmail, IsNotEmpty, IsNumber, IsString, MinLength} from 'class-validator';
 import {Roles} from '../../../authentication/models/roles.emum';
 
-
 export class AccountDto {
     @IsEmail()
     @IsNotEmpty()

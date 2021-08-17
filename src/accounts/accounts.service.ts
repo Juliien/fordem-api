@@ -10,7 +10,7 @@ export class AccountsService {
     constructor(@InjectModel(Account.name) private accountModel: Model<AccountDocument>){}
 
     async getAccounts(): Promise<Account[]> {
-        return await this.accountModel.find().exec();
+        return this.accountModel.find().exec();
     }
 
     async getAccountById(accountId: string): Promise<Account> {
@@ -27,7 +27,7 @@ export class AccountsService {
     }
 
     async getAccountByEmail(accountEmail: string): Promise<Account> {
-        return await this.accountModel.findOne({email: accountEmail}).exec();
+        return this.accountModel.findOne({email: accountEmail}).exec();
     }
 
     async createAccounts(account: AccountDto): Promise<AccountDocument> {
@@ -39,6 +39,6 @@ export class AccountsService {
             createDate: new Date()
         });
 
-        return await newAccount.save();
+        return newAccount.save();
     }
 }

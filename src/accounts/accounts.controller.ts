@@ -1,4 +1,4 @@
-import {Controller, Get, HttpStatus, NotFoundException, Param, Res, UseGuards} from '@nestjs/common';
+import {Controller, Get, HttpStatus, Param, Res, UseGuards} from '@nestjs/common';
 import {AccountsService} from './accounts.service';
 import JwtAuthGuard from '../authentication/passport/jwt-auth.guard';
 
