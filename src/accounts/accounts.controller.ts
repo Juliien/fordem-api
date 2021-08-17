@@ -1,4 +1,4 @@
-import {Controller, Get, Param, UseGuards} from '@nestjs/common';
+import {Controller, Get, HttpStatus, NotFoundException, Param, Res, UseGuards} from '@nestjs/common';
 import {AccountsService} from './accounts.service';
 import JwtAuthGuard from '../authentication/passport/jwt-auth.guard';
 
@@ -8,14 +8,14 @@ export class AccountsController {
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    async getAllUsers() {
-        return await this.accountService.getAccounts();
+    async getAllUsers(@Res() res) {
+        const accounts = await this.accountService.getAccounts();
+        return res.status(HttpStatus.OK).json(accounts);
     }
 
     @Get(':id')
-    async getAccountById(@Param('id') accountId: string) {
-        const res = await this.accountService.getAccountById(accountId);
-        console.log(res);
-        return res;
+    async getAccountById(@Res() res, @Param('id') accountId: string) {
+        const account = await this.accountService.getAccountById(accountId);
+        return res.status(HttpStatus.OK).json(account);
     }
 }
