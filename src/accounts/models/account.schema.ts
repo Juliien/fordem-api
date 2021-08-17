@@ -1,13 +1,14 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { Roles } from '../../authentication/models/roles.emum';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {Roles} from '../../authentication/models/roles.emum';
+import * as mongoose from 'mongoose';
+import {Document} from 'mongoose';
 
 export type AccountDocument = Account & Document;
 
 @Schema()
 export class Account {
-    @Prop({ type: Types.ObjectId })
-    _id: string
+    @Prop({ type: mongoose.Schema.Types.ObjectId })
+    _id: mongoose.Types.ObjectId;
 
     @Prop()
     email: string;
