@@ -23,8 +23,6 @@ export class AccountDto {
     role: Roles;
 
     @IsDate()
-    @IsNotEmpty()
-    @IsDefined()
     createDate: Date;
     closeDate: Date;
 }
