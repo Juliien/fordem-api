@@ -10,6 +10,9 @@ export class Account {
     _id: string;
 
     @Prop()
+    name: string;x
+
+    @Prop()
     email: string;
 
     @Prop()

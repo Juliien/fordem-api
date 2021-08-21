@@ -31,13 +31,23 @@ export class AccountsService {
     }
 
     async createAccounts(account: AccountDto): Promise<Account> {
-        let id = mongoose.Types.ObjectId();
+        const accountId = mongoose.Types.ObjectId();
+        let accountRole: string;
+        switch (account.role) {
+            case Roles.ASSOCIATION:
+                accountRole = Roles.ASSOCIATION;
+                break;
+            case Roles.COMPANY:
+                accountRole = Roles.COMPANY;
+                break;
+        }
         const newAccount: AccountDocument = new this.accountModel({
-            _id: id,
+            _id: accountId,
+            name: account.name,
             email: account.email,
             password: account.password,
             phoneNumber: account.phoneNumber,
-            role: Roles.ASSOCIATION,
+            role: accountRole,
             createDate: new Date()
         });
         return newAccount.save();
