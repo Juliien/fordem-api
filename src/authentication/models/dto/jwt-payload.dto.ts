@@ -1,4 +1,4 @@
-import {IsDefined, IsEmail, IsNotEmpty, IsString} from 'class-validator';
+import {IsDefined, IsNotEmpty, IsString} from 'class-validator';
 import {Roles} from '../roles.emum';
 
 export class JwtPayloadDto {
@@ -7,12 +7,10 @@ export class JwtPayloadDto {
     @IsDefined()
     id: string;
 
-
     @IsString()
-    @IsEmail()
     @IsNotEmpty()
     @IsDefined()
-    email: string;
+    name: string;
 
     @IsNotEmpty()
     @IsDefined()

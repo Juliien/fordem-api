@@ -39,7 +39,7 @@ export class AuthenticationService {
 
         const jwtPayload: JwtPayloadDto = {
             id: account._id,
-            email: account.email,
+            name: account.name,
             role: account.role
         };
         return { token: this.jwtService.sign(jwtPayload) };
@@ -58,7 +58,7 @@ export class AuthenticationService {
 
         const jwtPayload: JwtPayloadDto = {
             id: account._id,
-            email: account.email,
+            name: account.name,
             role: account.role
         };
         return { token: this.jwtService.sign(jwtPayload) };

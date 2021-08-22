@@ -22,7 +22,7 @@ export class AccountsService {
         if (!account) {
             throw new NotFoundException(`Account #${accountId} does not exist!`);
         }
-
+        account.password = undefined;
         return account;
     }
 
