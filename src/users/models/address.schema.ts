@@ -1,10 +1,8 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document, SchemaTypes} from 'mongoose';
 
-export type AddressDocument = Address & Document;
-
 @Schema()
-export class Address {
+export class Address extends Document{
     @Prop( { type: SchemaTypes.ObjectId })
     _id: string;
 

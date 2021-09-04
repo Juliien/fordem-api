@@ -7,8 +7,10 @@ import {Address, AddressSchema} from './models/address.schema';
 
 @Module({
   imports: [
-      MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-      MongooseModule.forFeature([{ name: Address.name, schema: AddressSchema }])
+      MongooseModule.forFeature([
+          { name: User.name, schema: UserSchema },
+          { name: Address.name, schema: AddressSchema },
+      ])
   ],
   controllers: [UsersController],
   providers: [UsersService]
