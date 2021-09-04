@@ -1,13 +1,13 @@
 import {ConflictException, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
-import {Account, AccountDocument} from './models/account.schema';
+import {Account} from './models/account.schema';
 import {Model, Types} from 'mongoose';
 import {AccountDto} from './models/dto/account.dto';
 import {Roles} from '../authentication/models/roles.emum';
 
 @Injectable()
 export class AccountsService {
-    constructor(@InjectModel(Account.name) private accountModel: Model<AccountDocument>){}
+    constructor(@InjectModel(Account.name) private accountModel: Model<Account>){}
 
     async getAccounts(): Promise<Account[]> {
         return this.accountModel.find().exec();
@@ -40,7 +40,7 @@ export class AccountsService {
                 accountRole = Roles.COMPANY;
                 break;
         }
-        const newAccount: AccountDocument = await new this.accountModel({
+        const newAccount: Account = await new this.accountModel({
             _id: accountId,
             name: account.name,
             email: account.email,
