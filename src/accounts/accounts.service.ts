@@ -4,7 +4,6 @@ import {Account, AccountDocument} from './models/account.schema';
 import {Model, Types} from 'mongoose';
 import {AccountDto} from './models/dto/account.dto';
 import {Roles} from '../authentication/models/roles.emum';
-import * as mongoose from 'mongoose';
 
 @Injectable()
 export class AccountsService {
@@ -31,7 +30,7 @@ export class AccountsService {
     }
 
     async createAccounts(account: AccountDto): Promise<Account> {
-        const accountId = mongoose.Types.ObjectId();
+        const accountId = Types.ObjectId();
         let accountRole: string;
         switch (account.role) {
             case Roles.ASSOCIATION:
@@ -41,7 +40,7 @@ export class AccountsService {
                 accountRole = Roles.COMPANY;
                 break;
         }
-        const newAccount: AccountDocument = new this.accountModel({
+        const newAccount: AccountDocument = await new this.accountModel({
             _id: accountId,
             name: account.name,
             email: account.email,
