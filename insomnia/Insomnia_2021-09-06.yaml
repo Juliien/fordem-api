@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-04T15:55:20.279Z
+__export_date: 2021-09-05T23:39:55.136Z
 __export_source: insomnia.desktop.app:v2021.5.2
 resources:
   - _id: req_afb6c2aaca974b2d82b3b60862b3fa71
@@ -211,7 +211,7 @@ resources:
     _type: request
   - _id: req_8781bbf1fa7b4aab9224621100f1174d
     parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
-    modified: 1630713662812
+    modified: 1630882751506
     created: 1630675269900
     url: "{{ _.baseUrl }}/users"
     name: get users
@@ -220,7 +220,10 @@ resources:
     body: {}
     parameters: []
     headers: []
-    authentication: {}
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
     metaSortKey: -1630712070059
     isPrivate: false
     settingStoreCookies: true
@@ -256,6 +259,30 @@ resources:
       token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
         'b64::JC50b2tlbg==::46b', 'always', 60 %}"
     metaSortKey: -1630712070046.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b064e3e2db6d48458d0ea9d57bda3c40
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630800498673
+    created: 1630800205785
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}/address"
+    name: get user address
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070040.25
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -302,6 +329,30 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_ad174ea181d3407388f2db077c5a3b17
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630884196013
+    created: 1630884122267
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}/validation"
+    name: user validation
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070021.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_60fb699c57c34349be961106f18bcc2b
     parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
     modified: 1630713946094
@@ -330,6 +381,77 @@ resources:
       token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
         'b64::JC50b2tlbg==::46b', 'always', 60 %}"
     metaSortKey: -1630712070009
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f944aab18ad84e109af472a80bfc91de
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630885166756
+    created: 1630883273067
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}"
+    name: update user
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"activity": "informatique",
+        	"managers": [
+        		"julien da corte"
+        	]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_fc3a165bbbed4676830e4839ea92faee
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712069984
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_afb66e101e5b4302a7249090b89ad145
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630883337084
+    created: 1630882561854
+    url: "{{ _.baseUrl }}/users/address/{{ _.addressId }}"
+    name: update address
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"street": "76 rue nationale",
+        	"city": "Paris",
+        	"state": "Ile de france",
+          "postalCode": "75013",
+          "country": "France"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_1236cfb6e7fe41f3974d2daf93c73e7d
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712069959
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -375,13 +497,14 @@ resources:
     _type: api_spec
   - _id: env_b77fd59168924942aeb746fe0e6adeee
     parentId: env_7ab842448c7a15e2856cad39f8824ee79f165fcf
-    modified: 1630714656262
+    modified: 1630883319699
     created: 1629071067808
     name: fordem local
     data:
       baseUrl: http://localhost:3000/api/v1
       accountId: 6121495cadf3b03b643ad41f
       userId: 6132bade9603de15dcd9c077
+      addressId: 61340bb2bed7b40008e651fb
       userEmail: pt@gmail.com
       userPassword: azerty12345678
     dataPropertyOrder:
@@ -389,6 +512,7 @@ resources:
         - baseUrl
         - accountId
         - userId
+        - addressId
         - userEmail
         - userPassword
     color: "#e01a55"
