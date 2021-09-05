@@ -1,4 +1,4 @@
-import {Injectable, InternalServerErrorException} from '@nestjs/common';
+import {Injectable, InternalServerErrorException, NotFoundException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
 import {User} from './models/user.schema';
@@ -14,11 +14,19 @@ export class UsersService {
     ) {}
 
     public async getUsers(): Promise<User[]> {
-        return this.userModel.find().populate('address').exec();
+        return this.userModel.find().exec();
     }
 
     public async getUsersById(id: string): Promise<User> {
-        return this.userModel.findById(id).populate('addresses', '', this.addressModel).exec();
+        return this.userModel.findById(id).exec();
+    }
+
+    public async getUsersAddress(id: string): Promise<Address> {
+        const user: User = await this.getUsersById(id);
+        if(!user) {
+            throw new NotFoundException(`User ${id} does not exist !`)
+        }
+        return this.addressModel.findById(user.addressId).exec();
     }
 
     public async createUser(user: UserDto): Promise<User> {
@@ -31,16 +39,15 @@ export class UsersService {
             activity: user.activity,
             siret:  user.siret,
             isValid: user.isValid,
-            lastUpdate: new Date()
+            createDate: new Date()
         });
         return newUser.save();
     }
 
     public async createUserAddress(address: AddressDto, userId: string): Promise<Address> {
         const id = Types.ObjectId();
-
         try {
-            await this.userModel.findOneAndUpdate({_id: userId}, {addressId: id, lastUpdate: new Date()});
+            await this.userModel.findByIdAndUpdate(userId, {addressId: id, lastUpdate: new Date()});
         } catch (e) {
             throw new InternalServerErrorException(e);
         }
@@ -55,5 +62,15 @@ export class UsersService {
             lastUpdate: new Date()
         });
         return newUserAddress.save();
+    }
+
+    public async updateUsers(userId: string, userDto: UserDto): Promise<User> {
+        userDto.lastUpdate = new Date();
+        const user = await this.userModel.findByIdAndUpdate(userId, userDto);
+        if (!user) {
+            throw new NotFoundException(`User #${user} not found`);
+        }
+
+        return user;
     }
 }

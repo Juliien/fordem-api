@@ -6,14 +6,14 @@ export class User extends Document {
     @Prop( { type: SchemaTypes.ObjectId })
     _id: string;
 
-    @Prop()
+    @Prop({ type: SchemaTypes.ObjectId, ref: 'accounts' })
     accountId: string;
+
+    @Prop({ type: SchemaTypes.ObjectId, ref: 'addresses' })
+    addressId: Types.ObjectId;
 
     @Prop()
     managers: string[];
-
-    @Prop({ type: SchemaTypes.ObjectId, ref: 'Address' })
-    addressId: Types.ObjectId;
 
     @Prop()
     activity: string;
@@ -23,6 +23,9 @@ export class User extends Document {
 
     @Prop()
     isValid: boolean;
+
+    @Prop()
+    createDate: Date;
 
     @Prop()
     lastUpdate: Date;

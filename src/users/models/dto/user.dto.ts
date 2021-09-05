@@ -5,4 +5,5 @@ export class UserDto {
     activity: string;
     siret: string;
     isValid: boolean;
+    lastUpdate: Date
 }

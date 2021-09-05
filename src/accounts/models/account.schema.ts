@@ -8,7 +8,7 @@ export class Account extends Document {
     _id: string;
 
     @Prop()
-    name: string;x
+    name: string;
 
     @Prop()
     email: string;
