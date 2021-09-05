@@ -4,7 +4,7 @@ import JwtAuthGuard from '../authentication/passport/jwt-auth.guard';
 
 @Controller('accounts')
 export class AccountsController {
-    constructor(private readonly accountService: AccountsService) {}
+    constructor(private readonly accountService: AccountsService) { }
 
     @UseGuards(JwtAuthGuard)
     @Get()
@@ -13,6 +13,7 @@ export class AccountsController {
         return res.status(HttpStatus.OK).json(accounts);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async getAccountById(@Res() res, @Param('id') accountId: string) {
         const account = await this.accountService.getAccountById(accountId);

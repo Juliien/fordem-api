@@ -1,14 +1,13 @@
 import {ConflictException, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
-import {Account, AccountDocument} from './models/account.schema';
+import {Account} from './models/account.schema';
 import {Model, Types} from 'mongoose';
 import {AccountDto} from './models/dto/account.dto';
 import {Roles} from '../authentication/models/roles.emum';
-import * as mongoose from 'mongoose';
 
 @Injectable()
 export class AccountsService {
-    constructor(@InjectModel(Account.name) private accountModel: Model<AccountDocument>){}
+    constructor(@InjectModel(Account.name) private accountModel: Model<Account>){}
 
     async getAccounts(): Promise<Account[]> {
         return this.accountModel.find().exec();
@@ -22,7 +21,7 @@ export class AccountsService {
         if (!account) {
             throw new NotFoundException(`Account #${accountId} does not exist!`);
         }
-
+        account.password = undefined;
         return account;
     }
 
@@ -31,13 +30,23 @@ export class AccountsService {
     }
 
     async createAccounts(account: AccountDto): Promise<Account> {
-        let id = mongoose.Types.ObjectId();
-        const newAccount: AccountDocument = new this.accountModel({
-            _id: id,
+        const accountId = Types.ObjectId();
+        let accountRole: string;
+        switch (account.role) {
+            case Roles.ASSOCIATION:
+                accountRole = Roles.ASSOCIATION;
+                break;
+            case Roles.COMPANY:
+                accountRole = Roles.COMPANY;
+                break;
+        }
+        const newAccount: Account = await new this.accountModel({
+            _id: accountId,
+            name: account.name,
             email: account.email,
             password: account.password,
             phoneNumber: account.phoneNumber,
-            role: Roles.ASSOCIATION,
+            role: accountRole,
             createDate: new Date()
         });
         return newAccount.save();

@@ -7,6 +7,11 @@ export class JwtPayloadDto {
     @IsDefined()
     id: string;
 
+    @IsString()
+    @IsNotEmpty()
+    @IsDefined()
+    name: string;
+
     @IsNotEmpty()
     @IsDefined()
     role: Roles;

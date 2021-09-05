@@ -1,0 +1,541 @@
+_type: export
+__export_format: 4
+__export_date: 2021-09-05T23:39:55.136Z
+__export_source: insomnia.desktop.app:v2021.5.2
+resources:
+  - _id: req_afb6c2aaca974b2d82b3b60862b3fa71
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1629241307691
+    created: 1629241301292
+    url: "{{ _.baseUrl }}"
+    name: Hello
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1629241301292
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    parentId: null
+    modified: 1627602747869
+    created: 1627602747869
+    name: Collection
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_a7e87611747f42ecafd9f9d690aa3cfb
+    parentId: fld_dd8e7ca8dec64af2865c5436a88cac0d
+    modified: 1630713649110
+    created: 1629111399521
+    url: "{{ _.baseUrl }}/auth/login"
+    name: login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "{{ _.userEmail }}",
+        	"password": "{{ _.userPassword }}"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0d3cf6930324415c8e069da3cb7f5372
+    authentication: {}
+    metaSortKey: -1629228669059
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_dd8e7ca8dec64af2865c5436a88cac0d
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1630713589371
+    created: 1629111542819
+    name: Authentication
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629208865572.25
+    _type: request_group
+  - _id: req_92d784b2e7904b3bb2167dfbb55779b0
+    parentId: fld_dd8e7ca8dec64af2865c5436a88cac0d
+    modified: 1630713651958
+    created: 1627602757099
+    url: " {{ _.baseUrl }}/auth/register"
+    name: register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "juliendacorte@gmail.com",
+        	"password": "admin12345678",
+        	"phoneNumber": "0637643269"	
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_d2405b1f2db84921a4d26ddd0b546730
+    authentication: {}
+    metaSortKey: -1629228669034
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fdf5ca0c7058404f9f28f2e5d4e74edf
+    parentId: fld_dd8e7ca8dec64af2865c5436a88cac0d
+    modified: 1630713657802
+    created: 1629218272091
+    url: "{{ _.baseUrl }}/auth/token/refresh"
+    name: refresh token
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1629228669021.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c1496e7fdb754d61a6299005f46f7b46
+    parentId: fld_dd8e7ca8dec64af2865c5436a88cac0d
+    modified: 1629229022161
+    created: 1629228669009
+    url: "{{ _.baseUrl }}/auth/token"
+    name: get token decoded
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1629228669009
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ba7c31b2284a46a3a966ef6c37b18444
+    parentId: fld_f66e0456f2af40c39bdb45f5050354cb
+    modified: 1629234321173
+    created: 1629071000585
+    url: "{{ _.baseUrl }}/accounts"
+    name: get accounts
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1629111327765
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_f66e0456f2af40c39bdb45f5050354cb
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1630713599189
+    created: 1629111558413
+    name: Accounts
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629192647712.375
+    _type: request_group
+  - _id: req_6e64407ed8a74f4c81590ecbaf847b2c
+    parentId: fld_f66e0456f2af40c39bdb45f5050354cb
+    modified: 1629590442638
+    created: 1629111327715
+    url: "{{ _.baseUrl }}/accounts/{{ _.accountId }}"
+    name: get accounts by id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1629111327715
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8781bbf1fa7b4aab9224621100f1174d
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630882751506
+    created: 1630675269900
+    url: "{{ _.baseUrl }}/users"
+    name: get users
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070059
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1630624722892
+    created: 1630624515846
+    name: Users
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629176429852.5
+    _type: request_group
+  - _id: req_ccf81533ff704f619fca025162cd486f
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630714603143
+    created: 1630713989168
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}"
+    name: get user by id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070046.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b064e3e2db6d48458d0ea9d57bda3c40
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630800498673
+    created: 1630800205785
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}/address"
+    name: get user address
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070040.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f2389a8ab1b345d39a92349ac14c3af7
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630713839262
+    created: 1630624537541
+    url: "{{ _.baseUrl }}/users"
+    name: add user
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"accountId": "6121495cadf3b03b643ad41f",
+        	"activity": "agricole",
+        	"managers": [
+        		"julien da corte",
+        		"lise barn"
+        	],
+          "isValid": true
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_cb33fd36db7648509a81a9288c27baa2
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070034
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ad174ea181d3407388f2db077c5a3b17
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630884196013
+    created: 1630884122267
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}/validation"
+    name: user validation
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070021.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_60fb699c57c34349be961106f18bcc2b
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630713946094
+    created: 1630712070009
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}/address"
+    name: add address
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"street": "72 rue rivolie",
+        	"city": "Paris",
+        	"state": "Ile de france",
+          "postalCode": "75012",
+          "country": "France"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_9a9515c2588b443994b74de7e9518e37
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712070009
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f944aab18ad84e109af472a80bfc91de
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630885166756
+    created: 1630883273067
+    url: "{{ _.baseUrl }}/users/{{ _.userId }}"
+    name: update user
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"activity": "informatique",
+        	"managers": [
+        		"julien da corte"
+        	]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_fc3a165bbbed4676830e4839ea92faee
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712069984
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_afb66e101e5b4302a7249090b89ad145
+    parentId: fld_daf7fd65d3e04c65bce88b36d85ef4b8
+    modified: 1630883337084
+    created: 1630882561854
+    url: "{{ _.baseUrl }}/users/address/{{ _.addressId }}"
+    name: update address
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"street": "76 rue nationale",
+        	"city": "Paris",
+        	"state": "Ile de france",
+          "postalCode": "75013",
+          "country": "France"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_1236cfb6e7fe41f3974d2daf93c73e7d
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_a7e87611747f42ecafd9f9d690aa3cfb',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1630712069959
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_7ab842448c7a15e2856cad39f8824ee79f165fcf
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1627602748052
+    created: 1627602748052
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1627602748052
+    _type: environment
+  - _id: jar_7ab842448c7a15e2856cad39f8824ee79f165fcf
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1627602933913
+    created: 1627602748057
+    name: Default Jar
+    cookies:
+      - key: JSESSIONID
+        value: 1893A3469B960C007647DEAE1EC7057F
+        domain: cas-sso.reseau-ges.fr
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2021-07-29T23:54:39.883Z
+        lastAccessed: 2021-07-29T23:55:33.913Z
+        id: "9640865772374398"
+    _type: cookie_jar
+  - _id: spc_8c7d2bead9ca492a83dba75f966c12ff
+    parentId: wrk_6f0f990db7d146a7a3a82b2e49fdd8af
+    modified: 1627602747876
+    created: 1627602747876
+    fileName: Collection
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_b77fd59168924942aeb746fe0e6adeee
+    parentId: env_7ab842448c7a15e2856cad39f8824ee79f165fcf
+    modified: 1630883319699
+    created: 1629071067808
+    name: fordem local
+    data:
+      baseUrl: http://localhost:3000/api/v1
+      accountId: 6121495cadf3b03b643ad41f
+      userId: 6132bade9603de15dcd9c077
+      addressId: 61340bb2bed7b40008e651fb
+      userEmail: pt@gmail.com
+      userPassword: azerty12345678
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+        - accountId
+        - userId
+        - addressId
+        - userEmail
+        - userPassword
+    color: "#e01a55"
+    isPrivate: false
+    metaSortKey: 1629071067808
+    _type: environment
+  - _id: env_d658036506db409ea9707a8cecd2026c
+    parentId: env_7ab842448c7a15e2856cad39f8824ee79f165fcf
+    modified: 1629241257364
+    created: 1629241082567
+    name: fordem production
+    data:
+      baseUrl: https://fordem-api.herokuapp.com/api/v1
+      accountId: ""
+      userEmail: juliendacorte@gmail.com
+      userPassword: admin12345678
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+        - accountId
+        - userEmail
+        - userPassword
+    color: "#8b0dce"
+    isPrivate: false
+    metaSortKey: 1629071067858
+    _type: environment

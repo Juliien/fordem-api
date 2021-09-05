@@ -2,12 +2,13 @@ import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Roles} from '../../authentication/models/roles.emum';
 import {Document, SchemaTypes} from 'mongoose';
 
-export type AccountDocument = Account & Document;
-
 @Schema()
-export class Account {
+export class Account extends Document {
     @Prop( { type: SchemaTypes.ObjectId })
     _id: string;
+
+    @Prop()
+    name: string;
 
     @Prop()
     email: string;
