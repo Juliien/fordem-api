@@ -12,7 +12,7 @@ require('dotenv').config();
 
 @Module({
   imports: [
-      MongooseModule.forRoot(process.env.MONGO_URI),
+      MongooseModule.forRoot(process.env.MONGO_URI, { useFindAndModify: false }),
       AuthenticationModule,
       AccountsModule,
       UsersModule,

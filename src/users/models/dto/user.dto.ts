@@ -4,6 +4,4 @@ export class UserDto {
     addressId: string;
     activity: string;
     siret: string;
-    isValid: boolean;
-    lastUpdate: Date
 }

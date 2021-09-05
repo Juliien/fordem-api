@@ -4,4 +4,5 @@ export class AddressDto {
     postalCode: string;
     state:string
     country: string;
+    lastUpdate: Date;
 }

@@ -19,6 +19,12 @@ export class UsersController {
         }
     }
 
+    // TODO - add admin role
+    @Post(':id/validation')
+    public async userValidation(@Res() res, @Param('id') userId: string) {
+        return res.status(HttpStatus.OK).json(await this.usersService.userValidation(userId));
+    }
+
     @Post()
     public async addUser(@Res() res, @Body() user: UserDto) {
         const newUser = await this.usersService.createUser(user);
@@ -55,4 +61,9 @@ export class UsersController {
         return res.status(HttpStatus.CREATED).json(newUser);
     }
 
+    @Put('address/:id')
+    public async updateUserAddress(@Res() res, @Body() address: AddressDto, @Param('id') addressId: string) {
+        const updatedAddress = await this.usersService.updateUsersAddress(addressId, address);
+        return res.status(HttpStatus.CREATED).json(updatedAddress);
+    }
 }

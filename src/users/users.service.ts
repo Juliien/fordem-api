@@ -38,7 +38,7 @@ export class UsersService {
             addressId: user.addressId,
             activity: user.activity,
             siret:  user.siret,
-            isValid: user.isValid,
+            isValid: false,
             createDate: new Date()
         });
         return newUser.save();
@@ -65,12 +65,37 @@ export class UsersService {
     }
 
     public async updateUsers(userId: string, userDto: UserDto): Promise<User> {
-        userDto.lastUpdate = new Date();
-        const user = await this.userModel.findByIdAndUpdate(userId, userDto);
+        const user = await this.userModel.findByIdAndUpdate(userId, {
+            lastUpdate: new Date(),
+            managers: userDto.managers,
+            activity: userDto.activity
+        });
+
         if (!user) {
-            throw new NotFoundException(`User #${user} not found`);
+            throw new NotFoundException(`User #${userId} not found`);
         }
 
-        return user;
+        return this.userModel.findById(userId);
+    }
+
+    public async updateUsersAddress(addressId: string, address: AddressDto): Promise<Address> {
+        address.lastUpdate = new Date();
+        const updatedAddress: Address = await this.addressModel.findByIdAndUpdate(addressId, address);
+
+        if (!updatedAddress) {
+            throw new NotFoundException(`Address #${addressId} not found`);
+        }
+
+        return this.addressModel.findById(addressId);
+    }
+
+    public async userValidation(id: string): Promise<User> {
+        const user: User = await this.userModel.findByIdAndUpdate(id, {isValid: true});
+
+        if (!user) {
+            throw new NotFoundException(`User #${id} not found`);
+        }
+
+        return this.userModel.findById(id);
     }
 }
