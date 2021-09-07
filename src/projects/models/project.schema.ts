@@ -6,7 +6,7 @@ export class Project extends Document {
     @Prop( { type: SchemaTypes.ObjectId })
     _id: string;
 
-    @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
+    @Prop({ type: SchemaTypes.ObjectId, ref: 'users' })
     userId: string;
 
     @Prop()
@@ -16,10 +16,10 @@ export class Project extends Document {
     description: string;
 
     @Prop()
-    targetAmount: string;
+    targetAmount: number;
 
     @Prop()
-    currentAmount: string;
+    currentAmount: number;
 
     @Prop()
     createDate: Date;
